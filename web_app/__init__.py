@@ -14,9 +14,7 @@ def create_app(config_class=BaseConfig):
 
     if not app.debug:
         pass
-
     
-
     from web_app.lines.views import lines
     app.register_blueprint(lines,  url_prefix='/lines')
 
