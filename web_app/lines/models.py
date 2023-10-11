@@ -8,8 +8,8 @@ class Line(db.Model):
     id:  Mapped[int] = mapped_column(primary_key=True)
     ion: Mapped[str] = mapped_column(String(5))
     wavelength: Mapped[float]
-    rel_int: Mapped[str] = mapped_column(nullable=True)
-    Aki: Mapped[float] = mapped_column(nullable=True)
+    rel_int: Mapped[int] = mapped_column(nullable=True)
+    Aki: Mapped[int] = mapped_column(nullable=True)
     Acc: Mapped[str] = mapped_column(String(5), nullable=True)
     Ei: Mapped[float] = mapped_column(nullable=True)
     Ek: Mapped[float] = mapped_column(nullable=True)
