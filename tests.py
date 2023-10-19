@@ -56,6 +56,17 @@ class LinesTestCase(unittest.TestCase):
         self.assertEqual(rv.json[1]['element'], 'O')
         self.assertEqual(rv.json[1]['ion'], 'I')
     
+    def test_return_element_lines(self):
+        rv = self.client.get('/lines/element/Bi')
+        for line in rv.json:
+            self.assertEqual(line['element'], 'Bi')
+    
+    def test_return_line_by_id(self):
+        rv = self.client.get('/lines/1')
+        self.assertEqual(rv.json['wavelength'], 202.0958)
+        self.assertEqual(rv.json['ion'], "III")
+        self.assertEqual(rv.json['element'], "Bi")
+        
 
 
 if __name__ == '__main__':
