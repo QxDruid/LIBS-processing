@@ -40,16 +40,22 @@ class LinesTestCase(unittest.TestCase):
     def test_db_select(self):
         with self.app.app_context():
             self.assertEqual(Line.query.count(), 3)
-            self.assertEqual(Line.query.get(1).ion, 'Bi III')
-            res = Line.query.filter(Line.rel_int > 100).all()
+            self.assertEqual(db.session.get(Line, 1).element, 'Bi')
+            self.assertEqual(db.session.get(Line, 1).ion, 'III')
+            #res = Line.query.filter(Line.rel_int > 100).all()
+            stmt = db.select(Line).filter(Line.rel_int > 100)
+            res = db.session.execute(stmt).all()
+            print(f'-------------{res[0]}----------------')
             self.assertEqual(len(res), 2)
-            self.assertGreater(res[0].rel_int, 100)
-            self.assertGreater(res[1].rel_int, 100)
+            self.assertGreater(res[0].Line.rel_int, 100)
+            self.assertGreater(res[1].Line.rel_int, 100)
 
-    def test_return_value(self):
+    def test_return_all_lines(self):
         rv = self.client.get('/lines/')
         self.assertEqual(rv.json[0]['wavelength'], 202.0958)
-        self.assertEqual(rv.json[1]['ion'], 'O I')
+        self.assertEqual(rv.json[1]['element'], 'O')
+        self.assertEqual(rv.json[1]['ion'], 'I')
+    
 
 
 if __name__ == '__main__':
