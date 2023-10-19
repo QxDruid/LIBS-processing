@@ -6,8 +6,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 class Line(db.Model):
     __tablename__ = "spectral_line"
     id:  Mapped[int] = mapped_column(primary_key=True)
-    element: Mapped[str] = mapped_column(String(5))
-    ion: Mapped[str] = mapped_column(String(5))
+    element: Mapped[str] = mapped_column(String(5), nullable=True)
+    ion: Mapped[str] = mapped_column(String(5), nullable=True)
     wavelength: Mapped[float]
     rel_int: Mapped[int] = mapped_column(nullable=True)
     Aki: Mapped[int] = mapped_column(nullable=True)
